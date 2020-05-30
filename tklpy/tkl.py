@@ -1,9 +1,8 @@
+import numpy as np
 from tklpy.utils import kernelTypes
 from tklpy.utils import kernelFinder
 from scipy.sparse.linalg import eigs
-from scipy.optimize import minimize
 from qpsolvers import solve_qp
-import numpy as np
 
 #this implementation uses the package qpsolvers
 
@@ -62,7 +61,11 @@ class TKL:
         Anq = np.diag((-1*np.ones((dim,1)) + np.diag((self.eta * np.ones(dim-1, 1)),k=1) ))
         bnq = np.zeros((dim,1))
         lb = zeros(dim,1)
-        calcLambda = minimize()
+        calcLambda = solve_qp(Q,r,G=Anq,h=bnq,lb=lb,solver='quadprog')
+
+        self.TKL = Phia * diag(calcLambda) * Phia.transpose()
+        self.TKL = (self.TKL + (self.TKL).transpose())/2
+        return self.TKL
 
     def findKernel(self):
         X1 = (self.Xs).transpose()
