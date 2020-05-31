@@ -6,7 +6,6 @@ setuptools.setup(name='tklpy',
       url='http://github.com/jrjoaorenato/tklpy',
       author='João Renato Ribeiro Manesco',
       author_email='joaorenatorm@gmail.com',
-      description="A small example package",
       license='MIT',
       packages=setuptools.find_packages(),
       zip_safe=False)
