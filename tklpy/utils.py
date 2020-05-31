@@ -10,11 +10,11 @@ class kernelTypes(Enum):
 #    lap = 2 #todo
     
 class kernelFinder:
-    def findKernel(X, kernelType, gammaVar):
+    def findKernel(self, X, kernelType, gammaVar):
         if (kernelType == kernelTypes.rbf):
             return rbf_kernel(X.transpose(), gamma=gammaVar)
         elif (kernelType == kernelTypes.linear):
-            return linear_kernel(X.transpose(), dense_output=false)
+            return linear_kernel(X.transpose(), dense_output=False)
     #    elif (kernelType == kernelTypes.lap):
     #        pass
         elif (kernelType == kernelTypes.rbfLang):
