@@ -3,6 +3,8 @@ from tklpy.utils import kernelTypes
 from tklpy.utils import kernelFinder
 from scipy.sparse.linalg import eigs
 from qpsolvers import solve_qp
+from sklearn.svm import SVC
+from sklearn.metrics import accuracy_score
 
 #this implementation uses the package qpsolvers
 
@@ -63,9 +65,9 @@ class TKL:
         lb = zeros(dim,1)
         calcLambda = solve_qp(Q,r,G=Anq,h=bnq,lb=lb,solver='quadprog')
 
-        self.TKL = Phia * diag(calcLambda) * Phia.transpose()
-        self.TKL = (self.TKL + (self.TKL).transpose())/2
-        return self.TKL
+        self.tkl = Phia * diag(calcLambda) * Phia.transpose()
+        self.tkl = (self.tkl + (self.tkl).transpose())/2
+        return self.tkl
 
     def findKernel(self):
         X1 = (self.Xs).transpose()
@@ -75,18 +77,46 @@ class TKL:
         return self.Kernel
 
     def returnSourceDataTKL():
-        pass
-
-    def convertDatatoTKL():
-        pass
+        #used to train the svm
+        m = (self.Xs).transpose().shape[1]
+        return self.tkl(0:m,0:m)
         
     def returnTargetDataTKL():
-        pass
+        #used to test the svm
+        m = (self.Xs).transpose().shape[1]
+        return self.tkl(m:,0:m)
+
     def returnSourceDataKernel():
-        pass
+        m = (self.Xs).transpose().shape[1]
+        return self.Kernel(0:m,0:m)
+
     def returnTargetDataKernel():
-        pass
-    def trainSVM():
-        pass
-    def testSVM():
+        m = (self.Xs).transpose().shape[1]
+        return self.Kernel(m:,0:m)
+
+    def trainSVMforTKL(self):
+        Xs = self.returnSourceDataTKL()
+        TKsvc = SVC(kernel='precomputed')
+        TKsvc.fit(Xs, self.Ys)
+        self.TKsvc = TKsvc
+
+    def testSVMforTKL(self):
+        Xt = self.returnTargetDataTKL()
+        TKy_pred = self.TKsvc.predict(Xt)
+        acc_tkl = accuracy_score(self.Yt, TKy_pred)
+        return acc_tkl
+    
+    def trainSVMforKernel(self):
+        Xs = self.returnSourceDataKernel()
+        TKsvc = SVC(kernel='precomputed')
+        TKsvc.fit(Xs, self.Ys)
+        self.TKsvc = TKsvc
+
+    def testSVMforKernel(self):
+        Xt = self.returnTargetDataKernel()
+        TKy_pred = self.TKsvc.predict(Xt)
+        acc_tkl = accuracy_score(self.Yt, TKy_pred)
+        return acc_tkl
+
+    def convertDatatoTKL():
         pass
