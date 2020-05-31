@@ -44,9 +44,9 @@ class TKL:
         K = kernelFinder.findKernel(X, self.kerType, self.gamma)
         K = K + 1e-6 * np.eye(K.shape[1])
         Ks = K[0:m, 0:m]
-        Kt = K(m:,m:)
-        Kst = K(0:m,m:)
-        Kat = K(:, m:)
+        Kt = K[m:,m:]
+        Kst = K[0:m,m:]
+        Kat = K[:, m:]
 
         dim = min((Kt.shape[1] - 10), 200)
         #Lamt is the eigenvalues and Phit is the Eigenvectors
@@ -62,10 +62,10 @@ class TKL:
         r = (np.diag(B))*-1
         Anq = np.diag((-1*np.ones((dim,1)) + np.diag((self.eta * np.ones(dim-1, 1)),k=1) ))
         bnq = np.zeros((dim,1))
-        lb = zeros(dim,1)
+        lb = np.zeros(dim,1)
         calcLambda = solve_qp(Q,r,G=Anq,h=bnq,lb=lb,solver='quadprog')
 
-        self.tkl = Phia * diag(calcLambda) * Phia.transpose()
+        self.tkl = Phia * np.diag(calcLambda) * Phia.transpose()
         self.tkl = (self.tkl + (self.tkl).transpose())/2
         return self.tkl
 
@@ -76,23 +76,23 @@ class TKL:
         self.Kernel = kernelFinder.findKernel(X, self.kerType, self.gamma)
         return self.Kernel
 
-    def returnSourceDataTKL():
+    def returnSourceDataTKL(self):
         #used to train the svm
         m = (self.Xs).transpose().shape[1]
-        return self.tkl(0:m,0:m)
+        return self.tkl[0:m,0:m]
         
-    def returnTargetDataTKL():
+    def returnTargetDataTKL(self):
         #used to test the svm
         m = (self.Xs).transpose().shape[1]
-        return self.tkl(m:,0:m)
+        return self.tkl[m:,0:m]
 
-    def returnSourceDataKernel():
+    def returnSourceDataKernel(self):
         m = (self.Xs).transpose().shape[1]
-        return self.Kernel(0:m,0:m)
+        return self.Kernel[0:m,0:m]
 
-    def returnTargetDataKernel():
+    def returnTargetDataKernel(self):
         m = (self.Xs).transpose().shape[1]
-        return self.Kernel(m:,0:m)
+        return self.Kernel[m:,0:m]
 
     def trainSVMforTKL(self):
         Xs = self.returnSourceDataTKL()
@@ -118,5 +118,5 @@ class TKL:
         acc_tkl = accuracy_score(self.Yt, TKy_pred)
         return acc_tkl
 
-    def convertDatatoTKL():
+    def convertDatatoTKL(self, X):
         pass
