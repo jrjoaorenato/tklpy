@@ -8,9 +8,9 @@ Python implementation of the Transfer Kernel Learning method developed by Long e
 # Table of Contents
 * [tklpy](#tklpy)
 * [Table of Contents](#table-of-contents)
-* [Installation](##installation)
-* [Usage](##usage)
-* [Example](##example)
+* [Installation](#installation)
+* [Usage](#usage)
+* [Example](#example)
 
 ## Installation
 
