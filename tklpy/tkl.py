@@ -10,7 +10,7 @@ from sklearn.metrics import accuracy_score
 
 class TKL:
     """ TKL calculations class uses numpy data structures"""
-    def __init__(self, Xs, Xt, Ys, Yt, ker = kernelTypes.rbf, gamma = 1.0, eta = 1.1, svmc = 10.0):
+    def __init__(self, Xs, Xt, Ys, Yt, ker = kernelTypes.rbf, gamma = 1.0, eta = 1.1):
         """Constructor of the TKL class
 
         Arguments:
@@ -25,7 +25,7 @@ class TKL:
                 linear = 1 - is the linear kernel
                 lap = 2 - is the lap kernel - todo
             gamma reffers to the gamma proprierty of the rbf kernel
-            eta - ?
+            eta is the eigenspectrum damping factor
                 
         """
         self.Xs = Xs
@@ -35,7 +35,6 @@ class TKL:
         self.kerType = ker
         self.gamma = gamma
         self.eta = eta
-        self.svmc = 10.0
     
     def findTKL(self):
         """ This function is used to find the TKL Kernel 
