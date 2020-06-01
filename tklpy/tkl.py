@@ -61,6 +61,9 @@ class TKL:
         Phis = Kst * Phit * (np.linalg.inv(Lamt))
         Phia = Kat * Phit * (np.linalg.inv(Lamt))
 
+        #todo check this converter later
+        self.phixlamx = Phit * np.linalg.inv(Lamt)
+
         A = Phis.transpose() * Phis;
         B = Phis.transpose() * Ks * Phis;
         Q = np.multiply(A, A.transpose())
@@ -70,6 +73,9 @@ class TKL:
         bnq = np.zeros((dim,1))
         lb = np.zeros(dim,1)
         calcLambda = solve_qp(Q,r,G=Anq,h=bnq,lb=lb,solver='quadprog')
+
+        #todo check this converter later 2
+        self.lamphis = np.diag(calcLambda) * (Phis.transpose())
 
         self.tkl = Phia * np.diag(calcLambda) * Phia.transpose()
         self.tkl = (self.tkl + (self.tkl).transpose())/2
@@ -191,4 +197,10 @@ class TKL:
             Nd is the number of samples and f is the 
             dimensionality of the features
         """
-        pass
+        X1 = X.transpose()
+        X2 = (self.Xt).transpose()
+        Xk = np.concatenate((X1,X2),axis=1)
+        Kx0x = kernelFinder.findKernel(X.transpose(), self.kerType, self.gamma)
+
+        Phix0 = Kx0x * self.phixlamx
+        return Phix0 * self.lamphis
