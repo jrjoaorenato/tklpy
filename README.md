@@ -8,7 +8,7 @@ Python implementation of the Transfer Kernel Learning method developed by Long e
 * [Table of Contents](#table-of-contents)
 * [Installation](#installation)
     * [Method 1 - PIP](#method-1---pip)
-    * [Method 2 - Manual Installation](#method-2-manual---installation)
+    * [Method 2 - Manual Installation](#method-2---manual-installation)
 * [Usage](#usage)
 * [Example](#example)
 
