@@ -33,9 +33,9 @@ class kernelFinder:
         """
         
         if (kernelType == kernelTypes.rbf):
-            return rbf_kernel(X, gamma=gammaVar)
+            return rbf_kernel(X.transpose(), gamma=gammaVar)
         elif (kernelType == kernelTypes.linear):
-            return linear_kernel(X, dense_output=False)
+            return linear_kernel(X.transpose(), dense_output=False)
     #    elif (kernelType == kernelTypes.lap):
     #        pass
         elif (kernelType == kernelTypes.rbfLang):
@@ -43,7 +43,7 @@ class kernelFinder:
             n1sq = np.sum(np.square(X), axis = 0)
             n1 = X.shape[1]
             D = ((np.ones((n1,1))* n1sq)).transpose() + (np.ones((n1,1))* n1sq) - (2*np.matmul(X.transpose(), X))
-            gamma = gamma / np.mean(D)
+            gamma = gammaVar / np.mean(D)
             K = np.exp(-gamma * D)
             return K
         else:
