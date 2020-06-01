@@ -1,4 +1,5 @@
 #calculate kernel with sklearn
+import numpy as np
 from enum import Enum
 from sklearn.metrics.pairwise import rbf_kernel
 from sklearn.metrics.pairwise import linear_kernel
@@ -16,7 +17,7 @@ class kernelTypes(Enum):
 #    lap = 2 #todo
     
 class kernelFinder:
-    def findKernel(self, X, kernelType, gammaVar = 1.0):
+    def findKernel(self, X, kernelType = 0, gammaVar = 1.0):
         """Returns the kernel based on the type of 
         enum kernel passed
 
@@ -36,7 +37,11 @@ class kernelFinder:
     #        pass
         elif (kernelType == kernelTypes.rbfLang):
             #todo fazer a implementação do kernel igual ao matlab
-            pass
+            n1sq = np.sum(np.square(X), axis =0)
+            n1 = X.shape[1]
+            D = ((np.ones(n1,1) * n1sq).transpose()) + np.ones(n1,1) * n1sq - (2*(X.transpose() * X))
+            gamma = gamma / np.mean(D)
+            return np.exp(-gamma * D)
         else:
             raise NameError('Unsupported Kernel')
 
