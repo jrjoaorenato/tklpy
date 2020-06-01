@@ -14,10 +14,12 @@ class kernelTypes(Enum):
     rbf = 0
     linear = 1
     rbfLang = 2
-#    lap = 2 #todo
+#    lap = 3 #todo
     
 class kernelFinder:
-    def findKernel(self, X, kernelType = 0, gammaVar = 1.0):
+
+    @staticmethod
+    def findKernel(X, kernelType = kernelTypes.rbf, gammaVar = 1.0):
         """Returns the kernel based on the type of 
         enum kernel passed
 
@@ -29,6 +31,7 @@ class kernelFinder:
         Returns:
             [Matrix] -- Kernelized data
         """
+        
         if (kernelType == kernelTypes.rbf):
             return rbf_kernel(X, gamma=gammaVar)
         elif (kernelType == kernelTypes.linear):
@@ -37,11 +40,11 @@ class kernelFinder:
     #        pass
         elif (kernelType == kernelTypes.rbfLang):
             #todo fazer a implementação do kernel igual ao matlab
-            n1sq = np.sum(np.square(X), axis =0)
+            n1sq = np.sum(np.square(X), axis = 0)
             n1 = X.shape[1]
-            D = ((np.ones(n1,1) * n1sq).transpose()) + np.ones(n1,1) * n1sq - (2*(X.transpose() * X))
+            D = ((np.ones((n1,1))* n1sq)).transpose() + (np.ones((n1,1))* n1sq) - (2*np.matmul(X.transpose(), X))
             gamma = gamma / np.mean(D)
-            return np.exp(-gamma * D)
+            K = np.exp(-gamma * D)
+            return K
         else:
             raise NameError('Unsupported Kernel')
-

@@ -1,2 +1,2 @@
-from tkl import TKL
-from utils import KernelEnum
+from tklpy import tkl
+from tklpy import utils
