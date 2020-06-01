@@ -3,6 +3,12 @@
 
 Python implementation of the Transfer Kernel Learning method developed by Long et. al. (2015). It's available as package and based on the original implementation of the TKL method from the origial authors, this implementation can be found [here](http://ise.thss.tsinghua.edu.cn/~mlong/doc/transfer-kernel-learning-tkde15.zip).
 
+After using this package consider citing the original author paper with:
+
+```
+M. Long, J. Wang, J. Sun and P. S. Yu, "Domain Invariant Transfer Kernel Learning," in IEEE Transactions on Knowledge and Data Engineering, vol. 27, no. 6, pp. 1519-1532, 1 June 2015, doi: 10.1109/TKDE.2014.2373376.
+```
+
 # Table of Contents
 * [tklpy](#tklpy)
 * [Table of Contents](#table-of-contents)
