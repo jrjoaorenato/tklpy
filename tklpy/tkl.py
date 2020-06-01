@@ -47,7 +47,7 @@ class TKL:
         X2 = (self.Xt).transpose()
         X = np.concatenate((X1,X2),axis=1)
         m = X1.shape[1]
-        K = kernelFinder.findKernel(X.transpose(), self.kerType, self.gamma)
+        K = kernelFinder.findKernel(X, self.kerType, self.gamma)
         K = K + 1e-6 * np.eye(K.shape[1])
         Ks = K[0:m, 0:m]
         Kt = K[m:,m:]
@@ -57,27 +57,29 @@ class TKL:
         dim = min((Kt.shape[1] - 10), 200)
         #Lamt is the eigenvalues and Phit is the Eigenvectors
         [Lamt, Phit] = eigs((Kt + Kt.transpose())/2, dim, which='LM')
-        Lamt = np.diag(Lamt,k=0)
-        Phis = Kst * Phit * (np.linalg.inv(Lamt))
-        Phia = Kat * Phit * (np.linalg.inv(Lamt))
+        Lamt = np.real(Lamt)
+        Phit = np.real(Phit)
+        Lamt = np.diag(Lamt)
+        Phis = np.matmul(np.matmul(Kst, Phit),(np.linalg.inv(Lamt)))
+        Phia = np.matmul(np.matmul(Kat, Phit),(np.linalg.inv(Lamt)))
 
         #todo check this converter later
-        self.phixlamx = Phit * np.linalg.inv(Lamt)
+        self.phixlamx = np.matmul(Phit, np.linalg.inv(Lamt))
 
-        A = Phis.transpose() * Phis;
-        B = Phis.transpose() * Ks * Phis;
-        Q = np.multiply(A, A.transpose())
+        A = np.matmul(Phis.transpose(), Phis)
+        B = np.matmul(np.matmul(Phis.transpose(), Ks), Phis)
+        Q = np.multiply(A.transpose(), A)
         Q = (Q + Q.transpose())/2
         r = (np.diag(B))*-1
-        Anq = np.diag((-1*np.ones((dim,1)) + np.diag((self.eta * np.ones(dim-1, 1)),k=1) ))
+        Anq = np.diag(-np.ones((dim))) + np.diag((self.eta * np.ones((dim-1))), 1)
         bnq = np.zeros((dim,1))
-        lb = np.zeros(dim,1)
-        calcLambda = solve_qp(Q,r,G=Anq,h=bnq,lb=lb,solver='quadprog')
+        lb = np.zeros((dim,1))
+        calcLambda = solve_qp(P=Q,q=r,G=Anq,h=bnq.ravel(),lb=lb.ravel(),solver='quadprog')
 
         #todo check this converter later 2
-        self.lamphis = np.diag(calcLambda) * (Phis.transpose())
+        self.lamphis = np.matmul(np.diag(calcLambda), (Phis.transpose()))
 
-        self.tkl = Phia * np.diag(calcLambda) * Phia.transpose()
+        self.tkl = np.matmul(np.matmul(Phia, np.diag(calcLambda)), Phia.transpose())
         self.tkl = (self.tkl + (self.tkl).transpose())/2
         return self.tkl
 
