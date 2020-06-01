@@ -1,24 +1,24 @@
 # tklpy
 <!-- WIP: Need to better explain how TKL works -->
 
-<!-- WIP: Do a package wiki -->
-
 Python implementation of the Transfer Kernel Learning method developed by Long et. al. (2015). It's available as package and based on the original implementation of the TKL method from the origial authors, this implementation can be found [here](http://ise.thss.tsinghua.edu.cn/~mlong/doc/transfer-kernel-learning-tkde15.zip).
 
 # Table of Contents
 * [tklpy](#tklpy)
 * [Table of Contents](#table-of-contents)
 * [Installation](#installation)
+    *[Method 1 - PIP](#method-1-pip)
+    *[Method 2 - Manual Installation](#method-2-manual-installation)
 * [Usage](#usage)
 * [Example](#example)
 
 ## Installation
 
-<!-- WIP: Update with pypi link -->
+### Method 1 - PIP
+Just run:
+```pip install tklpy``` 
 
-<!--### Method 1 - pypi-->
-
-<!--### Method 2 - Manual Installation-->
+### Method 2 - Manual Installation
 
 First, clone the directory, by running:
 
