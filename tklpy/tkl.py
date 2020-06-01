@@ -10,7 +10,7 @@ from sklearn.metrics import accuracy_score
 
 class TKL:
     """ TKL calculations class uses numpy data structures"""
-    def __init__(self, Xs, Xt, Ys, Yt, ker = kernelTypes.rbf, gamma = 1.0, eta = 2.0):
+    def __init__(self, Xs, Xt, Ys, Yt, ker = kernelTypes.rbf, gamma = 1.0, eta = 1.1, svmc = 10.0):
         """Constructor of the TKL class
 
         Arguments:
@@ -35,6 +35,7 @@ class TKL:
         self.kerType = ker
         self.gamma = gamma
         self.eta = eta
+        self.svmc = 10.0
     
     def findTKL(self):
         """ This function is used to find the TKL Kernel 
@@ -93,7 +94,7 @@ class TKL:
         X1 = (self.Xs).transpose()
         X2 = (self.Xt).transpose()
         X = np.concatenate((X1,X2),axis=1)
-        self.Kernel = kernelFinder.findKernel(X.transpose(), self.kerType, self.gamma)
+        self.Kernel = kernelFinder.findKernel(X, self.kerType, self.gamma)
         return self.Kernel
 
     def returnSourceDataTKL(self):
@@ -153,8 +154,8 @@ class TKL:
         'returnSourceDataTKL()'
         """
         Xs = self.returnSourceDataTKL()
-        TKsvc = SVC(kernel='precomputed')
-        TKsvc.fit(Xs, self.Ys)
+        TKsvc = SVC(kernel='precomputed', decision_function_shape='ovo')
+        TKsvc.fit(Xs, self.Ys.ravel())
         self.TKsvc = TKsvc
 
     def testSVMforTKL(self):
@@ -164,7 +165,7 @@ class TKL:
         """
         Xt = self.returnTargetDataTKL()
         TKy_pred = self.TKsvc.predict(Xt)
-        acc_tkl = accuracy_score(self.Yt, TKy_pred)
+        acc_tkl = accuracy_score(self.Yt.ravel(), TKy_pred)
         return acc_tkl
     
     def trainSVMforKernel(self):
@@ -173,8 +174,8 @@ class TKL:
         'returnSourceDataKernel()'
         """
         Xs = self.returnSourceDataKernel()
-        TKsvc = SVC(kernel='precomputed')
-        TKsvc.fit(Xs, self.Ys)
+        TKsvc = SVC(kernel='precomputed', decision_function_shape='ovo')
+        TKsvc.fit(Xs, self.Ys.ravel())
         self.TKsvc = TKsvc
 
     def testSVMforKernel(self):
@@ -184,7 +185,7 @@ class TKL:
         """
         Xt = self.returnTargetDataKernel()
         TKy_pred = self.TKsvc.predict(Xt)
-        acc_tkl = accuracy_score(self.Yt, TKy_pred)
+        acc_tkl = accuracy_score(self.Yt.ravel(), TKy_pred)
         return acc_tkl
 
     def convertDatatoTKL(self, X):
