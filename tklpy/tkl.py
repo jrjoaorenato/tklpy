@@ -68,6 +68,7 @@ class TKL:
 
         A = np.matmul(Phis.transpose(), Phis)
         B = np.matmul(np.matmul(Phis.transpose(), Ks), Phis)
+        #todo change a.transpose to a and test
         Q = np.multiply(A.transpose(), A)
         Q = (Q + Q.transpose())/2
         r = (np.diag(B))*-1
