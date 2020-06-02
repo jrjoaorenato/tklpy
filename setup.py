@@ -1,10 +1,10 @@
 import setuptools
 
 setuptools.setup(name='tklpy',
-      version='0.0.1',
+      version='0.0.2',
       description='Python implementation of the Transfer Kernel Learning method developed by Long et. al. (2015).',
       url='http://github.com/jrjoaorenato/tklpy',
-      download_url = 'https://github.com/jrjoaorenato/tklpy/archive/0.0.1.tar.gz',
+      download_url = 'http://github.com/jrjoaorenato/tklpy/archive/v0.0.2.tar.gz',
       author='João Renato Ribeiro Manesco',
       author_email='joaorenatorm@gmail.com',
       license='MIT',
