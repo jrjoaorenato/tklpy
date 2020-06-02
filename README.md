@@ -53,9 +53,9 @@ You will also most likely need the enum list of the Kernel Types, which can be f
 
 The types of kernel that can be found are:
 
-0. ```rbf``` - RBF Kernel using the sklearn implementation
-1. ```linear``` - Linear Kernel using the sklearn implementation
-2. ```rbfLang``` - RBF Kernel using the original authors implementation and gamma calculation
+0. `rbf` - RBF Kernel using the sklearn implementation
+1. `linear` - Linear Kernel using the sklearn implementation
+2. `rbfLang` - RBF Kernel using the original authors implementation and gamma calculation
 
 To access the Kernel types you can use: `kernelTypes.<your Kernel>`.
 
@@ -76,7 +76,7 @@ Arguments:
     ker is the type of kernel present utils.kernelTypes
         rbf = 0 - is the rbf kernel
         linear = 1 - is the linear kernel
-        lap = 2 - is the lap kernel - todo
+        rbfLang = 2 - is the lap kernel - todo
     gamma reffers to the gamma proprierty of the rbf kernel
     eta is the eigenspectrum damping factor
 ```
@@ -87,9 +87,9 @@ You can also train and test a simple SVM implemented on sklearn after finding th
 
 ## Example
 ```python
+import numpy as np
 from tklpy.tkl import TKL
 from tklpy.utils import kernelTypes
-import numpy as np
 from scipy.io import loadmat
 
 D = loadmat(<some .mat dataset location>)
