@@ -55,7 +55,7 @@ The types of kernel that can be found are:
 
 0. `rbf` - RBF Kernel using the sklearn implementation
 1. `linear` - Linear Kernel using the sklearn implementation
-2. `rbfLang` - RBF Kernel using the original authors implementation and gamma calculation
+2. `rbfLang` - RBF Kernel using the original authors implementation and gamma calculation (recommended)
 
 To access the Kernel types you can use: `kernelTypes.<your Kernel>`.
 
@@ -74,9 +74,9 @@ Arguments:
     Ys {numpy Array with ns elements} -- [Labels of the Source Domain data]
     Yt {numpy Array with nt elements} -- [Labels of the Target Domain data, for benchmarking purposes]
     ker is the type of kernel present utils.kernelTypes
-        rbf = 0 - is the rbf kernel
+        rbf = 0 - is the RBF kernel
         linear = 1 - is the linear kernel
-        rbfLang = 2 - is the lap kernel - todo
+        rbfLang = 2 - RBF Kernel using the original authors implementation and gamma calculation
     gamma reffers to the gamma proprierty of the rbf kernel
     eta is the eigenspectrum damping factor
 ```
