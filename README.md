@@ -62,7 +62,7 @@ To access the Kernel types you can use: `kernelTypes.<your Kernel>`.
 After properly importing the package you can create an instance of the TKL class, with the following attributes:
 
 ```
-TKL(Xs, Xt, Ys, Yt, ker = kernelTypes.rbf, gamma = 1.0, eta = 1.1)
+TKL(Xs, Xt, Ys, Yt, ker = kernelTypes.rbfLang, gamma = 1.0, eta = 1.1)
 ```
 
 ```
