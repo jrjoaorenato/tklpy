@@ -19,7 +19,7 @@ class kernelTypes(Enum):
 class kernelFinder:
 
     @staticmethod
-    def findKernel(X, kernelType = kernelTypes.rbf, gammaVar = 1.0):
+    def findKernel(X, kernelType = kernelTypes.rbf, gammaVar = None):
         """Returns the kernel based on the type of 
         enum kernel passed
 

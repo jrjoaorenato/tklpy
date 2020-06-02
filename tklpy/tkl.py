@@ -69,7 +69,7 @@ class TKL:
         A = np.matmul(Phis.transpose(), Phis)
         B = np.matmul(np.matmul(Phis.transpose(), Ks), Phis)
         #todo change a.transpose to a and test
-        Q = np.multiply(A.transpose(), A)
+        Q = np.multiply(A, A)
         Q = (Q + Q.transpose())/2
         r = (np.diag(B))*-1
         Anq = np.diag(-np.ones((dim))) + np.diag((self.eta * np.ones((dim-1))), 1)
