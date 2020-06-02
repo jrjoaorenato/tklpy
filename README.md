@@ -61,8 +61,8 @@ To access the Kernel types you can use: `kernelTypes.<your Kernel>`.
 
 After properly importing the package you can create an instance of the TKL class, with the following attributes:
 
-```
-TKL(Xs, Xt, Ys, Yt, ker = kernelTypes.rbfLang, gamma = 1.0, eta = 1.1)
+```python
+TKL(Xs, Xt, Ys, Yt, ker = kernelTypes.rbfLang, gamma = 1.0, eta = 1.1, svmc = 10.0)
 ```
 
 ```
@@ -79,6 +79,7 @@ Arguments:
         rbfLang = 2 - RBF Kernel using the original authors implementation and gamma calculation
     gamma reffers to the gamma proprierty of the rbf kernel
     eta is the eigenspectrum damping factor
+    svmc is the svm complexity regularizer
 ```
 
 After creating your instance `tk` of the TKL class, you can find the Domain Invariant Kernel by running `tk.findTKL()` or you can find the regular Kernel by running `tk.findKernel()`. You can also use the methods `tk.returnSourceDataTKL()`, `tk.returnTargetDataTKL()`, `tk.returnSourceDataKernel()` and `tk.returnTargetDataKernel()` to return the desired domain Data projected into the desired Kernel.
@@ -98,7 +99,7 @@ Xt = D['Xt']
 Ys = D['Ys']
 Yt = D['Yt']
 
-tk = TKL(Xs,Xt,Ys,Yt,kernelTypes.rbfLang, 1.0, 1.1)
+tk = TKL(Xs,Xt,Ys,Yt,kernelTypes.rbfLang, 1.0, 1.1, 10.0)
 tk.findTKL()
 tk.findKernel()
 tk.trainSVMforTKL()
