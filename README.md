@@ -12,7 +12,7 @@ M. Long, J. Wang, J. Sun and P. S. Yu, "Domain Invariant Transfer Kernel Learnin
 This package was developed with the intent of usage on the following paper:
 
 ```
-Manesco, J., & Marana, A. (2020). Domain Adaptation for Robust Face Recognition Using Transfer Kernel Learning. In Anais do XVI Workshop de Visão Computacional, (pp. 64-68). Porto Alegre: SBC. doi:10.5753/wvc.2020.13482
+MANESCO, João Renato; MARANA, Aparecido. Domain Adaptation for Robust Face Recognition Using Transfer Kernel Learning. In: Anais do XVI Workshop de Visão Computacional. SBC, 2020. p. 64-68.
 ```
 
 # Table of Contents
