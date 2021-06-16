@@ -9,6 +9,12 @@ After using this package consider citing the original paper with:
 M. Long, J. Wang, J. Sun and P. S. Yu, "Domain Invariant Transfer Kernel Learning," in IEEE Transactions on Knowledge and Data Engineering, vol. 27, no. 6, pp. 1519-1532, 1 June 2015, doi: 10.1109/TKDE.2014.2373376.
 ```
 
+This package was developed with the intent of usage on the following paper:
+
+```
+Manesco, J., & Marana, A. (2020). Domain Adaptation for Robust Face Recognition Using Transfer Kernel Learning. In Anais do XVI Workshop de Visão Computacional, (pp. 64-68). Porto Alegre: SBC. doi:10.5753/wvc.2020.13482
+```
+
 # Table of Contents
 * [tklpy](#tklpy)
 * [Table of Contents](#table-of-contents)
