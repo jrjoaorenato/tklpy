@@ -6,13 +6,13 @@ Python implementation of the Transfer Kernel Learning method developed by Long e
 After using this package consider citing the original paper with:
 
 ```
-M. Long, J. Wang, J. Sun and P. S. Yu, "Domain Invariant Transfer Kernel Learning," in IEEE Transactions on Knowledge and Data Engineering, vol. 27, no. 6, pp. 1519-1532, 1 June 2015, doi: 10.1109/TKDE.2014.2373376.
+M. Long, J. Wang, J. Sun and P. S. Yu, "Domain Invariant Transfer Kernel Learning", in IEEE Transactions on Knowledge and Data Engineering, vol. 27, no. 6, pp. 1519-1532, 1 June 2015, doi: 10.1109/TKDE.2014.2373376.
 ```
 
 This package was developed with the intent of usage on the following paper:
 
 ```
-MANESCO, João Renato; MARANA, Aparecido. Domain Adaptation for Robust Face Recognition Using Transfer Kernel Learning. In: Anais do XVI Workshop de Visão Computacional. SBC, 2020. p. 64-68.
+J. Manesco and A. Marana. "Domain Adaptation for Robust Face Recognition Using Transfer Kernel Learning", in Anais do XVI Workshop de Visão Computacional, Evento Online, 2020, pp. 64-68, doi: https://doi.org/10.5753/wvc.2020.13482.
 ```
 
 # Table of Contents
